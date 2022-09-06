@@ -85,7 +85,7 @@ def parse_magnet_uri(magnet_uri: str):
     parsed = urllib.parse.urlparse(magnet_uri)
     query_terms = urllib.parse.parse_qs(parsed.query)
 
-    if (len(query_terms["xt"]) != 1 or len(query_terms["dn"]) != 1):
+    if ("xt" not in query_terms or len(query_terms["xt"]) != 1 or "dn" not in query_terms or len(query_terms["dn"]) != 1):
         ValueError(f"Failed to parse magnet_uri {magnet_uri}")
 
     _, hash_algorithm, infohash = query_terms["xt"][0].split(":")
